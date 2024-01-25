@@ -24,7 +24,6 @@ export async function login() {
   return signInWithPopup(auth, provider)
     .then((result) => {
       const user = result.user;
-      console.log(user);
       return user;
     })
     .catch(console.error);
@@ -47,7 +46,7 @@ export function onUserStateChange(callback) {
 async function adminUser(user) {
   // 2. 사용자가 admin 권한을 가지고 있는지 확인
   // 3. {...user, isAdmin : true/false} -> 기존 user에 isAdmin 속성을 추가
-  return get(ref(database, "/admins")) //
+  return get(ref(database, "/admins"))
     .then((snapshot) => {
       if (snapshot.exists()) {
         const admins = snapshot.val();
