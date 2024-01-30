@@ -78,3 +78,14 @@ export async function addNewProduct(product, image) {
     options: product.options.split(","),
   });
 }
+
+export async function getProducts() {
+  return get(ref(database, "products")).then((snapshot) => {
+    if (snapshot.exists()) {
+      // Object.values를 사용하면 key value중 value들만 가져올 수 있음
+      const data = Object.values(snapshot.val());
+      return data;
+    }
+    return [];
+  });
+}

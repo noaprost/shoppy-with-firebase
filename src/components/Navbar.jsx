@@ -35,21 +35,23 @@ export default function Navbar() {
           <FiShoppingBag className="text-orange-400 w-7 h-7 hover:text-orange-500" />
           Shoppy
         </Link>
-        <div className="flex flex-row items-center w-72 justify-evenly">
-          <Link to="/products">products</Link>
+        <div className="flex flex-row items-center w-80 justify-evenly text-center">
+          <Link to="/products" className="w-16 h-7 text-center">
+            products
+          </Link>
           {user && (
             <Link to="/carts">
-              <FiShoppingCart />
+              <FiShoppingCart className="w-7 h-7 p-1" />
             </Link>
           )}
           {user && user.isAdmin && (
             <Link to="/products/new">
-              <GoPencil />
+              <GoPencil className="w-7 h-7 p-1" />
             </Link>
           )}
           {user && (
             <>
-              <div className="bg-green-200 text-center rounded-xl text-green-700 font-semibold w-7 y-2 pb-1">
+              <div className="bg-purple-100 rounded-xl text-center text-black font-semibold w-7 h-7">
                 {user.displayName[0]}
               </div>
               <p className="hidden md:block">{user.displayName}</p>

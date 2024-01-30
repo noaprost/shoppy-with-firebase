@@ -22,7 +22,7 @@ export default function NewProduct() {
           // 성공했다는 메세지를 계속 띄워주면 안되므로 일정 시간 후에 없애줌
           setTimeout(() => {
             setSuccess(null);
-          }, 14000);
+          }, 4000);
         });
       })
       .finally(() => {
