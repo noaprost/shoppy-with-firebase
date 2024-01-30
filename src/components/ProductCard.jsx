@@ -19,10 +19,10 @@ export default function ProductCard({
     >
       <img src={image} alt="image" className="w-full" />
       <div className="pt-2 px-4 flex flex-row justify-between items-center ">
-        <h2 className="font-semibold truncate">{title}</h2>
-        <p>{price} ₩</p>
+        <h2 className="font-semibold truncate text-lg">{title}</h2>
+        <p className="text-lg">₩{price}</p>
       </div>
-      <p className="text-xs py-2 px-4 text-gray-600">{category}</p>
+      <p className="text-sm py-2 px-4 text-gray-600">{category}</p>
     </li>
   );
 }

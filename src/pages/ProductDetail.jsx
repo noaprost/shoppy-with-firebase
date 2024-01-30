@@ -24,9 +24,9 @@ export default function ProductDetail() {
         <img src={image} className="w-1/3 h-1/2" />
         <div className="flex flex-col w-1/3">
           <p className="font-semibold text-2xl my-2">{title}</p>
-          <p className="my-2 text-md">{price} ₩</p>
+          <p className="my-2 text-lg">₩{price}</p>
           <hr />
-          <p className="my-3 text-sm">{description}</p>
+          <p className="my-3 text-md">{description}</p>
           <section className="flex flex-row my-5">
             <p className="p-1">옵션 :</p>
             <select

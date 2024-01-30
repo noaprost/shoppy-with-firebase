@@ -30,13 +30,13 @@ export default function Navbar() {
       <div className="flex flex-row px-32 py-5 justify-between">
         <Link
           to="/"
-          className="flex flex-row items-center w-32 justify-evenly text-2xl text-orange-400 hover:text-orange-500"
+          className="flex flex-row items-center w-32 justify-evenly text-3xl text-orange-400 hover:text-orange-500 font-semibold"
         >
           <FiShoppingBag className="text-orange-400 w-7 h-7 hover:text-orange-500" />
           Shoppy
         </Link>
         <div className="flex flex-row items-center w-80 justify-evenly text-center">
-          <Link to="/products" className="w-16 h-7 text-center">
+          <Link to="/products" className="w-16 mt-1 h-7 text-center">
             products
           </Link>
           {user && (
