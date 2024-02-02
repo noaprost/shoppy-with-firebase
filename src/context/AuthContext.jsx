@@ -16,7 +16,9 @@ export function AuthContextProvider({ children }) {
   }, []);
   return (
     // 로그인과 로그아웃은 firebase에서 정의한 함수를 그대로 사용할 수 있도록 해줌
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, uid: user && user.uid, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );

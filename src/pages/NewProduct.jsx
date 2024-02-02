@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { uploadImage } from "../api/uploader";
-import { addNewProduct } from "../api/firebase";
+import useProducts from "../hooks/useProducts";
 
 export default function NewProduct() {
   const [product, setProduct] = useState({});
@@ -10,25 +10,31 @@ export default function NewProduct() {
   // 성공했는지의 여부 상태, 초기에는 아무것도 없는 상태 undefined
   const [success, setSuccess] = useState();
 
+  const { addProduct } = useProducts();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsUploading(true);
     // 제품의 사진을 Cloudinary에 업로드 하고 URL을 획득
     uploadImage(file)
-      .then((url) => {
+      .then((url) =>
         // FireBase에 새로운 제품을 추가함
-        addNewProduct(product, url).then(() => {
-          setSuccess("성공적으로 제품이 추가 되었습니다.");
-          // 성공했다는 메세지를 계속 띄워주면 안되므로 일정 시간 후에 없애줌
-          setTimeout(() => {
-            setSuccess(null);
-          }, 4000);
-        });
-      })
-      .finally(() => {
-        setIsUploading(false);
-      });
+        addProduct.mutate(
+          { product, url },
+          {
+            onSucess: () => {
+              setSuccess("성공적으로 제품이 추가 되었습니다.");
+              // 성공했다는 메세지를 계속 띄워주면 안되므로 일정 시간 후에 없애줌
+              setTimeout(() => {
+                setSuccess(null);
+              }, 4000);
+            },
+          }
+        )
+      )
+      .finally(() => setIsUploading(false));
   };
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "file") {
@@ -37,6 +43,7 @@ export default function NewProduct() {
     }
     setProduct((product) => ({ ...product, [name]: value }));
   };
+
   return (
     <section>
       <p className="text-2xl font-semibold text-center py-5">

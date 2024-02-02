@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { FiShoppingBag } from "react-icons/fi";
-import { FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { GoPencil } from "react-icons/go";
 import { login, logout, onUserStateChange } from "../api/firebase";
 import Button from "./ui/Button";
+import CartsStatus from "./CartsStatus";
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
@@ -41,7 +41,7 @@ export default function Navbar() {
           </Link>
           {user && (
             <Link to="/carts">
-              <FiShoppingCart className="w-7 h-7 p-1" />
+              <CartsStatus/>
             </Link>
           )}
           {user && user.isAdmin && (

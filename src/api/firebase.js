@@ -6,7 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getDatabase, ref, get, set } from "firebase/database";
+import { getDatabase, ref, get, set, remove } from "firebase/database";
 import { v4 as v4uuid } from "uuid";
 
 // * 기본 설정 *
@@ -83,9 +83,32 @@ export async function getProducts() {
   return get(ref(database, "products")).then((snapshot) => {
     if (snapshot.exists()) {
       // Object.values를 사용하면 key value중 value들만 가져올 수 있음
-      const data = Object.values(snapshot.val());
-      return data;
+      return Object.values(snapshot.val());
     }
     return [];
   });
+}
+
+// * 장바구니 *
+
+// 장바구니에 있는 상품을 가지고 오는 함수 (carts안에는 user id 별로 카트가 따로 분리되어서 저장되어 있음)
+export async function getCart(userId) {
+  return get(ref(database, `carts/${userId}`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      return Object.values(snapshot.val());
+    }
+    return [];
+  });
+}
+
+// 장바구니에 상품을 추가하거나 업데이트 해주는 함수 (제품의 id 아래에 정보 추가)
+// product에는 id, price, 장바구니에 추가하는 수량이 몇개인지가 담겨있음
+export async function addOrUpdateToCart(userId, product) {
+  return set(ref(database, `carts/${userId}/${product.id}`), product);
+}
+
+// 장바구니에서 상품을 삭제하는 함수
+export async function removeFromCart(userId, productId) {
+  // database에서 정보를 삭제할 때는 remove를 사용
+  return remove(ref(database, `carts/${userId}/${productId}`));
 }
