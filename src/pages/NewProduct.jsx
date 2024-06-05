@@ -3,12 +3,12 @@ import { uploadImage } from "../api/uploader";
 import useProducts from "../hooks/useProducts";
 
 export default function NewProduct() {
-  const [product, setProduct] = useState({});
   const [file, setFile] = useState();
   // uploading 중인 상태, 초기는 로딩중이 아니므로 false
   const [isUploading, setIsUploading] = useState(false);
   // 성공했는지의 여부 상태, 초기에는 아무것도 없는 상태 undefined
   const [success, setSuccess] = useState();
+  const [product, setProduct] = useState({});
 
   const { addProduct } = useProducts();
 
