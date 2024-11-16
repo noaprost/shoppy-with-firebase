@@ -18,8 +18,8 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
 const auth = getAuth(app);
+const database = getDatabase(app);
 const provider = new GoogleAuthProvider();
 
 // * Auth *
@@ -45,6 +45,13 @@ export function onUserStateChange(callback) {
   // 비동기니까 async 붙여주고 adminUser가 user를 반환해 줄때까지 기다려야되니까 await을 붙여줌
   onAuthStateChanged(auth, async (user) => {
     // 1. 사용자가 있는 경우 (로그인한 경우)
+    if (user) {
+      console.log('User is logged in:', user);
+      // 데이터베이스 작업 수행
+    } else {
+      console.log('User is not logged in');
+      // 로그인 후 데이터베이스 작업 수행
+    }
     const updatedUser = user ? await adminUser(user) : null;
     callback(updatedUser);
   });

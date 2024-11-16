@@ -15,7 +15,6 @@ function App() {
         <Navbar />
         <Outlet />
       </AuthContextProvider>
-      <ReactQueryDevtools initialIsOpen={true} />
     </QueryClientProvider>
   );
 }

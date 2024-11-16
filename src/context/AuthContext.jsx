@@ -10,7 +10,6 @@ export function AuthContextProvider({ children }) {
     // aplication 실행 시 사용자의 세션이 남아있거나 로그인을 했다면 정상적인 user 객체가 전달됨
     // 로그아웃을 했다면 null이 전달됨
     onUserStateChange((user) => {
-      console.log(user);
       setUser(user);
     });
   }, []);
