@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, SDK_VERSION } from "firebase/app";
 import {
   getAuth,
   signInWithPopup,
@@ -20,6 +20,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
+console.log("database", database);
 const provider = new GoogleAuthProvider();
 
 // * Auth *
@@ -46,10 +47,10 @@ export function onUserStateChange(callback) {
   onAuthStateChanged(auth, async (user) => {
     // 1. 사용자가 있는 경우 (로그인한 경우)
     if (user) {
-      console.log('User is logged in:', user);
+      console.log("User is logged in:", user);
       // 데이터베이스 작업 수행
     } else {
-      console.log('User is not logged in');
+      console.log("User is not logged in");
       // 로그인 후 데이터베이스 작업 수행
     }
     const updatedUser = user ? await adminUser(user) : null;
